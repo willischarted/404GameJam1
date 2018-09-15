@@ -16,9 +16,33 @@ public class OuterAreaController : MonoBehaviour {
 
 	void OnTriggerStay(Collider other) {
 		//Check if  any player is within trigger boundary
-		if (other.tag == "Player") {
+		Debug.Log("Collision detected!!" + other.tag);
+
+		if (other.gameObject.tag == "Player") {
 			//do stuff here.
-			//Scale up player
+			//Check if moving -> yes? then scale up.
+			if (other.gameObject.name == "Player1") {
+			PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
+			if (playerController == null) {
+				Debug.Log("Cound not find playerController!");
+
+			}
+
+			if (playerController.getIsMoving()) {
+				playerController.ScaleUp();
+			}
+			}
+			if (other.gameObject.name == "Player2") {
+			Player2Controller player2Controller = other.gameObject.GetComponent<Player2Controller>();
+			if (player2Controller == null) {
+				Debug.Log("Cound not find playerController!");
+
+			}
+
+			if (player2Controller.getIsMoving()) {
+				player2Controller.ScaleUp();
+			}
+			}
 		}
 
 	}
